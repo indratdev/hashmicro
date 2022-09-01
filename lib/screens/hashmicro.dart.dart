@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hashmicro/screens/attendance/attendance_screen.dart';
-import 'package:hashmicro/screens/home/home_screen.dart';
+import 'package:hashmicro/screens/masters/master_screen.dart';
 import 'package:hashmicro/screens/setting/setting_screen.dart';
 import 'package:hashmicro/statemanagement/bloc/attendance_bloc.dart';
 
@@ -14,7 +14,7 @@ class HashmicroScreen extends StatelessWidget {
     int currentIndex = 0;
 
     List<Widget> _widgetOption = <Widget>[
-      HomeScreen(),
+      MasterScreen(),
       AttendanceScreen(),
       SettingScreen()
     ];
