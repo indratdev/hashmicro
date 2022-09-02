@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hashmicro/screens/masters/mapss_screen.dart';
 import 'package:hashmicro/screens/masters/mlocation_screen.dart';
 
 class MasterScreen extends StatelessWidget {
@@ -12,8 +13,8 @@ class MasterScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MasterLocationScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => MapssScreen()));
         },
         child: Icon(Icons.add),
       ),
