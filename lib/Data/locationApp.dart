@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationApp {
   String address = 'search';
 
-  Future<Position> _getGeoLocationPosition() async {
+  Future<Position> getGeoLocationPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
     // Test if location services are enabled.
@@ -54,5 +56,29 @@ class LocationApp {
     List<Location> locations = await locationFromAddress(address);
 
     return locations;
+  }
+
+// calculate 2 lat lon
+  int getDistanceFromLatLonInM(
+      double lat1, double lon1, double lat2, double lon2) {
+    int R = 6371; // Radius of the earth in m / 6371 for km
+    double dLat = deg2rad(lat2 - lat1); // deg2rad below
+    double dLon = deg2rad(lon2 - lon1);
+    double a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    double d = (R * c) * 1000; // Distance in meter
+    int result = d.ceil();
+    print("result getDistanceFromLatLonInM : $result");
+
+    return result;
+  }
+
+  deg2rad(deg) {
+    return deg * (pi / 180);
+  }
+
+  bool validateDistanceLocation(int distance) {
+    return (distance > 50) ? false : true;
   }
 }

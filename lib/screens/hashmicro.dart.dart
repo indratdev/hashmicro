@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hashmicro/screens/attendance/attendance_screen.dart';
 import 'package:hashmicro/screens/masters/master_screen.dart';
-import 'package:hashmicro/screens/setting/setting_screen.dart';
 import 'package:hashmicro/statemanagement/bloc/attendance_bloc.dart';
 
 class HashmicroScreen extends StatelessWidget {
@@ -16,7 +14,6 @@ class HashmicroScreen extends StatelessWidget {
     List<Widget> _widgetOption = <Widget>[
       MasterScreen(),
       AttendanceScreen(),
-      SettingScreen()
     ];
 
     return BlocBuilder<AttendanceBloc, AttendanceState>(
@@ -26,37 +23,28 @@ class HashmicroScreen extends StatelessWidget {
 
           switch (state.page) {
             case 0:
-              // BlocProvider.of<NewsBloc>(context)
-              //     .add(FetchNewsEvent(type: 'General'));
+              BlocProvider.of<AttendanceBloc>(context)
+                  .add(GetAllMasterLocation());
               break;
             case 1:
-              // BlocProvider.of<NewsBloc>(context)
-              //     .add(FetchTrendingNewsEvent(type: 'entertainment'));
+              BlocProvider.of<AttendanceBloc>(context)
+                  .add(GetAllMasterLocation());
               break;
           }
         }
         return Scaffold(
-          // appBar: AppBar(
-          //   title: Text("Attendance App"),
-          // ),
           body: _widgetOption.elementAt(currentIndex),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            items: <BottomNavigationBarItem>[
+            items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Master',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.trending_up),
-                label: 'Attendance',
+                label: 'Absen',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.account_circle,
-                ),
-                label: 'Setting',
-              )
             ],
             currentIndex: currentIndex,
             onTap: (value) {
